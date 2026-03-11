@@ -6,6 +6,7 @@ const { PORT } = require("../config/server.config");
 const metricsRoutes = require("../routes/metrics.routes");
 const { startTcpdumpStream } = require("../stream/tcpdump.stream");
 const { startScheduler } = require("../stream/scheduler");
+const testRoutes = require("../routes/test.routes");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/api", metricsRoutes);
+app.use("/api/test", testRoutes);
 
 startTcpdumpStream();
 startScheduler();
