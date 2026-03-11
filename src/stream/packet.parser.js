@@ -1,4 +1,6 @@
 function parsePacketLine(line) {
+
+    console.log("RAW LINE:", line);  // DEBUG
 // Example tcpdump line:
 // 1710000.123456 IP 192.168.1.10.54822 > 8.8.8.8.443: Flags [S], seq 12345, length 0
 
