@@ -1,0 +1,19 @@
+{
+"name": "packet-monitor-service",
+"version": "1.0.0",
+"description": "Layer 4 packet monitoring REST service using tcpdump streams",
+"main": "src/server/app.js",
+"scripts": {
+"start": "node src/server/app.js",
+"dev": "nodemon src/server/app.js"
+},
+"dependencies": {
+"express": "^4.18.2",
+"cors": "^2.8.5",
+"morgan": "^1.10.0",
+"dotenv": "^16.4.0"
+},
+"devDependencies": {
+"nodemon": "^3.0.3"
+}
+}
