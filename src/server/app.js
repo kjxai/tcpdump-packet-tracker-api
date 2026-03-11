@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const { PORT } = require("../config/server.config");
 const metricsRoutes = require("../routes/metrics.routes");
 const { startTcpdumpStream } = require("../stream/tcpdump.stream");
+const { startScheduler } = require("../stream/scheduler");
 
 const app = express();
 
@@ -15,7 +16,10 @@ app.use(morgan("dev"));
 app.use("/api", metricsRoutes);
 
 startTcpdumpStream();
+startScheduler();
 
 app.listen(PORT, () => {
 console.log(`Packet Monitor Service running on port ${PORT}`);
 });
+
+

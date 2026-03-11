@@ -1,3 +1,5 @@
+const metricsStore = require("../state/metrics.store");
+
 const health = (req, res) => {
 res.json({
 status: "ok",
@@ -7,10 +9,11 @@ timestamp: Date.now()
 };
 
 const latestMetrics = (req, res) => {
-res.json({
-message: "metrics endpoint placeholder",
-data: null
-});
+const snapshot = metricsStore.getLatest();
+if (!snapshot) {
+return res.status(404).json({ message: "No metrics yet" });
+}
+res.json(snapshot);
 };
 
 module.exports = {
