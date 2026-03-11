@@ -1,32 +1,22 @@
 function parsePacketLine(line) {
-try {
-    console.log("RAW LINE:", line);  // DEBUG
-const parts = line.trim().split(" ");
+// Example tcpdump line:
+// 1710000.123456 IP 192.168.1.10.54822 > 8.8.8.8.443: Flags [S], seq 12345, length 0
 
-```
-const timestamp = parseFloat(parts[0]);
+const match = line.match(/^(\d+.\d+)\s+IP\s+([0-9.]+).(\d+)\s+>\s+([0-9.]+).(\d+).*length\s+(\d+)/);
 
-const src = parts[2];
-const dest = parts[4];
+if (!match) return null;
 
-if (!src || !dest) return null;
-
-const [srcIP, srcPort] = src.split(".");
-const [destIP, destPort] = dest.replace(":", "").split(".");
+const [, timestamp, srcIP, srcPort, destIP, destPort, length] = match;
 
 return {
-  timestamp,
-  srcIP,
-  srcPort: Number(srcPort),
-  destIP,
-  destPort: Number(destPort),
-  protocol: line.includes("UDP") ? "UDP" : "TCP"
+timestamp: parseFloat(timestamp),
+srcIP,
+srcPort: Number(srcPort),
+destIP,
+destPort: Number(destPort),
+protocol: line.includes("UDP") ? "UDP" : "TCP",
+length: Number(length)
 };
-```
-
-} catch (err) {
-return null;
-}
 }
 
 module.exports = {
