@@ -1,5 +1,6 @@
 function parsePacketLine(line) {
 try {
+    console.log("RAW LINE:", line);  // DEBUG
 const parts = line.trim().split(" ");
 
 ```
